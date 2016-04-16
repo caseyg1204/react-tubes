@@ -1,8 +1,9 @@
 import React from 'react';
+import SearchBox from './SearchBox';
 
 const App = () =>
   (<div>
-      <h1>Youtube</h1>
+      <SearchBox />
     </div>
   );
 
