@@ -26,9 +26,10 @@ SearchBox.propTypes = {
   fields: React.PropTypes.object,
   actions: React.PropTypes.object,
   handleSubmit: React.PropTypes.func,
+  searchResults: React.PropTypes.object,
 };
 
-const mapStateToProps = ({ login }) => ({ login });
+const mapStateToProps = ({ searchResults }) => ({ searchResults });
 
 function mapDispatchToProps(dispatch) {
   return {
