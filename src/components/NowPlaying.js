@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import VideoPlayer from './VideoPlayer';
+import Favorite from './Favorite';
 
 import { search } from '../actions/search_action';
 
@@ -23,11 +24,13 @@ class NowPlaying extends Component {
   render() {
     const video = this.props.activeVideo.snippet;
     if (!this.props.activeVideo.id || !this.props.activeVideo.id.videoId) { return null; }
+    const { videoId } = this.props.activeVideo.id;
     return (<div>
-      <h1>{video.title}</h1>
-      <h2>{video.description}</h2>
-        <VideoPlayer />
-        {this.renderStats()}
+        <h1>{video.title}</h1>
+        <h2>{video.description}</h2>
+        <Favorite id={videoId} />
+          <VideoPlayer />
+          {this.renderStats()}
       </div>);
   }
 }
