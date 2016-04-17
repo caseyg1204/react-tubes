@@ -29,7 +29,12 @@ export default {
     loaders: [
       {test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel', 'eslint']},
       {test: /\.(jpe?g|png|gif|svg)$/i, loaders: ['file']},
-      {test: /(\.css|\.scss)$/, loaders: ['style', 'css?sourceMap', 'sass?sourceMap']}
+      {test: /(\.css|\.scss)$/,
+        include: [
+        path.join(__dirname, 'src'),
+        path.join(__dirname, 'node_modules/react-geosuggest/module'),
+      ],
+        loaders: ['style', 'css?sourceMap', 'sass?sourceMap']}
     ]
   }
 };

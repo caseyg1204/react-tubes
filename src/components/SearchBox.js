@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { reduxForm } from 'redux-form';
 import Select from 'react-select';
+import Geosuggest from 'react-geosuggest';
 
 import { search } from '../actions/search_action';
 
 class SearchBox extends Component {
+  constructor() {
+    super();
+    this.submitSearch = this.submitSearch.bind(this);
+  }
   componentWillMount = () => {
     this.setState({ sortOrder: this.sortOptions[0].id });
   }
@@ -23,11 +28,26 @@ class SearchBox extends Component {
     { id: 'date', display: 'Date' },
     { id: 'rating', display: 'Rating' },
   ]
-  search = (terms, order) => {
-    this.props.actions.search(this.props.fields.searchTerms.value, order);
+  search = (terms, order, location, radius) => {
+    this.props.actions.search(this.props.fields.searchTerms.value, order, location, radius);
   }
-  submitSearch = (terms) => {
-    this.search(terms.searchTerms, this.state.sortOrder);
+  submitSearch(terms) {
+    const { location } = this.state;
+    const { searchTerms } = this.props.fields;
+    if (!location) {
+      this.search(terms.searchTerms, this.state.sortOrder);
+    } else {
+      const locationString = `${location.location.lat},${location.location.lng}`;
+      this.search(searchTerms.value, this.state.sortOrder, locationString, '20mi');
+    }
+  }
+  selectPlace = location => {
+    this.setState({ location });
+  }
+  placeChange = value => {
+    if (!value) {
+      this.setState({ location: null });
+    }
   }
 
   render() {
@@ -35,7 +55,7 @@ class SearchBox extends Component {
       <div>
         <form onSubmit={this.props.handleSubmit(this.submitSearch)}>
           <input type="text" {...this.props.fields.searchTerms} />
-          <button onClick={this.search}>Search</button>
+          <button onClick={this.submitSearch} type="button">Search</button>
           <Select
             name="sortSelect"
             autosize
@@ -45,6 +65,13 @@ class SearchBox extends Component {
             labelKey="display"
             value={this.state.sortOrder}
           />
+          <div className="geo">
+          <Geosuggest
+            placeholder="Enter place to filter by location"
+            onSuggestSelect={this.selectPlace}
+            onChange={this.placeChange}
+          />
+          </div>
         </form>
       </div>);
   }
