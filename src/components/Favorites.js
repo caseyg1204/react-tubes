@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import VideoListItem from './VideoListItem';
+import FavoriteListItem from './FavoriteListItem';
 
 class Favorites extends Component {
   renderItems() {
@@ -11,7 +11,7 @@ class Favorites extends Component {
         <h2>Favorites</h2>
         {favorites.map((favorite, index) => {
           const item = this.props.favorites[favorite];
-          return <VideoListItem searchResult={item} key={index} />;
+          return <FavoriteListItem video={item} key={index} />;
         })}
       </div>
     );

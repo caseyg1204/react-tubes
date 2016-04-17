@@ -6,6 +6,9 @@ import cookie from 'react-cookie';
 import { addFavorite, removeFavorite } from '../actions/favorite_video';
 
 class Favorite extends Component {
+  componentWillMount() {
+    cookie.save('favorites', JSON.stringify(this.props.favorites), { path: '/' });
+  }
   componentWillReceiveProps(newProps) {
     cookie.save('favorites', JSON.stringify(newProps.favorites), { path: '/' });
   }
@@ -19,7 +22,7 @@ class Favorite extends Component {
   render() {
     const { video } = this.props;
     if (!video.id) { return null; }
-    const isFavorite = this.props.favorites[video.id.videoId];
+    const isFavorite = this.props.favorites[video.id];
     if (isFavorite) {
       return <button onClick={this.removeFavorite}>Unfavorite</button>;
     }

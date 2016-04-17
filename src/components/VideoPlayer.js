@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 
 class VideoPlayer extends Component {
   render() {
-    if (!this.props.activeVideo.id || !this.props.activeVideo.id.videoId) { return null; }
+    if (!this.props.activeVideo.id) { return null; }
     const iframe = {
       __html: '<iframe width="640" height="360"' +
-      `src="//www.youtube.com/embed/${this.props.activeVideo.id.videoId}"` +
+      `src="//www.youtube.com/embed/${this.props.activeVideo.id}"` +
       'frameborder="0" allowfullscreen></iframe>',
     };
     return (

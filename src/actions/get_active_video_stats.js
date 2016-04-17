@@ -6,22 +6,22 @@ export const STATS_FAIL = 'STATS_FAIL';
 
 export const getStats = videoId =>
   dispatch => (
-      axios.get('https://www.googleapis.com/youtube/v3/videos', {
-        params: {
-          part: 'statistics',
-          key: API_KEY,
-          id: videoId,
-        },
+    axios.get('https://www.googleapis.com/youtube/v3/videos', {
+      params: {
+        part: 'statistics',
+        key: API_KEY,
+        id: videoId,
+      },
+    })
+      .then(result => {
+        dispatch({
+          payload: result,
+          type: STATS_SUCCESS,
+        });
       })
-        .then(result => {
-          dispatch({
-            payload: result,
-            type: STATS_SUCCESS,
-          });
-        })
-        .catch(() => {
-          dispatch({
-            type: STATS_FAIL,
-          });
-        })
-      );
+      .catch(() => {
+        dispatch({
+          type: STATS_FAIL,
+        });
+      })
+  );

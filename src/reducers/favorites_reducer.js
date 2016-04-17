@@ -8,13 +8,14 @@ Object.assign(INITIAL_STATE, favorites);
 
 export default function (state = INITIAL_STATE, action) {
   const newState = Object.assign({}, state);
+  const { payload } = action;
   switch (action.type) {
     case FAVORITE_ADDED:
-      newState[action.payload.id.videoId] = action.payload;
+      newState[action.payload.id] = payload;
       return newState;
 
     case FAVORITE_REMOVED:
-      delete newState[action.payload.id.videoId];
+      delete newState[action.payload.id];
       return newState;
 
     default:

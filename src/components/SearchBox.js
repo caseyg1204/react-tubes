@@ -15,7 +15,7 @@ class SearchBox extends Component {
     this.setState({ sortOrder: this.sortOptions[0].id });
   }
   getSortValue() {
-    if (!this.state) {return null;}
+    if (!this.state) return null;
     return this.state.sortOrder;
   }
   selectedSort = option => {
@@ -29,14 +29,15 @@ class SearchBox extends Component {
   search = (terms, order, location, radius) => {
     this.props.actions.search(this.props.fields.searchTerms.value, order, location, radius);
   }
-  submitSearch(terms) {
-    const { location } = this.state;
+  submitSearch(event) {
+    event.preventDefault();
+    const { location, sortOrder } = this.state;
     const { searchTerms } = this.props.fields;
     if (!location) {
-      this.search(terms.searchTerms, this.state.sortOrder);
+      this.search(searchTerms.value, sortOrder);
     } else {
       const locationString = `${location.location.lat},${location.location.lng}`;
-      this.search(searchTerms.value, this.state.sortOrder, locationString, '20mi');
+      this.search(searchTerms.value, sortOrder, locationString, '20mi');
     }
   }
   selectPlace = location => {
@@ -50,42 +51,43 @@ class SearchBox extends Component {
 
   render() {
     return (
-        <form onSubmit={this.props.handleSubmit(this.submitSearch)}>
-          <input className="searchInput"
-            type="text"
-            {...this.props.fields.searchTerms}
-            placeholder="enter search"
-          />
-          <div className="group">
-            <div>OrderBy: </div>
-            <div className="orderBy">
-              <Select
-                className="select"
-                name="sortSelect"
-                autosize
-                onChange={this.selectedSort}
-                options={this.sortOptions}
-                valueKey="id"
-                labelKey="display"
-                value={this.state.sortOrder}
-              />
-            </div>
+      <form onSubmit={this.props.handleSubmit(this.submitSearch)}>
+        <input
+          className="searchInput"
+          type="text"
+          {...this.props.fields.searchTerms}
+          placeholder="enter search"
+        />
+        <div className="group">
+          <div>OrderBy: </div>
+          <div className="orderBy">
+            <Select
+              className="select"
+              name="sortSelect"
+              autosize
+              onChange={this.selectedSort}
+              options={this.sortOptions}
+              valueKey="id"
+              labelKey="display"
+              value={this.state.sortOrder}
+            />
           </div>
-          <div className=" group">
-            <div>Location: </div>
-            <div className="location">
-              <Geosuggest
-                className="geo"
-                placeholder="Enter place to filter by location"
-                onSuggestSelect={this.selectPlace}
-                onChange={this.placeChange}
-              />
-            </div>
+        </div>
+        <div className=" group">
+          <div>Location: </div>
+          <div className="location">
+            <Geosuggest
+              className="geo"
+              placeholder="Enter place to filter by location"
+              onSuggestSelect={this.selectPlace}
+              onChange={this.placeChange}
+            />
           </div>
-          <div>
-            <button onClick={this.submitSearch} type="button">Search</button>
-          </div>
-        </form>);
+        </div>
+        <div>
+          <button onClick={this.submitSearch}>Search</button>
+        </div>
+      </form>);
   }
 }
 
@@ -94,10 +96,9 @@ SearchBox.propTypes = {
   actions: React.PropTypes.object,
   handleSubmit: React.PropTypes.func,
   searchResults: React.PropTypes.object,
-  sortSearch: React.PropTypes.string,
 };
 
-const mapStateToProps = ({ searchResults, sortSearch }) => ({ searchResults, sortSearch });
+const mapStateToProps = ({ searchResults }) => ({ searchResults });
 
 function mapDispatchToProps(dispatch) {
   return {

@@ -7,16 +7,27 @@ import { getStats } from '../actions/get_active_video_stats';
 
 class VideoListItem extends Component {
   setAsActive = () => {
-    this.props.actions.selectVideo(this.props.searchResult);
+    const { searchResult } = this.props;
+    const video = {
+      id: searchResult.id.videoId,
+      title: searchResult.snippet.title,
+      description: searchResult.snippet.description,
+      channel: searchResult.snippet.channelTitle,
+      thumbnail: searchResult.snippet.thumbnails.high.url,
+    };
+    this.props.actions.selectVideo(video);
     this.props.actions.getStats(this.props.searchResult.id.videoId);
   }
   render() {
     const { searchResult } = this.props;
     if (!searchResult) { return null; }
     return (
-      <p onClick={this.setAsActive}>
-        {searchResult.snippet.title}
-      </p>);
+      <div onClick={this.setAsActive} className="item">
+        <img role="presentation" src={searchResult.snippet.thumbnails.high.url} />
+        <div className="textBackground">
+          <h3>{searchResult.snippet.title}</h3>
+        </div>
+      </div>);
   }
 }
 

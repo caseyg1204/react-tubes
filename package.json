@@ -1,7 +1,7 @@
 {
-  "name": "react-slingshot",
-  "version": "3.0.1",
-  "description": "Starter kit for creating apps with React and Redux",
+  "name": "react-tubes",
+  "version": "0.0.1",
+  "description": "Sample React Redux App",
   "scripts": {
     "start-message": "babel-node tools/startMessage.js",
     "prestart": "npm-run-all --parallel start-message remove-dist lint:tools",
@@ -17,7 +17,7 @@
     "test": "mocha tools/testSetup.js src/**/*.spec.js --reporter progress",
     "test:watch": "npm run test -- --watch"
   },
-  "author": "Cory House",
+  "author": "Casey Garland",
   "license": "MIT",
   "dependencies": {
     "axios": "0.9.1",
