@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 
 class VideoPlayer extends Component {
   render() {
+    if (!this.props.activeVideo.id || !this.props.activeVideo.id.videoId) { return null; }
     const iframe = {
       __html: '<iframe width="640" height="360"' +
-        `src="//www.youtube.com/embed/${this.props.activeVideo}"` +
-        'frameborder="0" allowfullscreen></iframe>',
+      `src="//www.youtube.com/embed/${this.props.activeVideo.id.videoId}"` +
+      'frameborder="0" allowfullscreen></iframe>',
     };
-    if (!this.props.activeVideo) { return null; }
     return (
         <div dangerouslySetInnerHTML={ iframe } />
       );
@@ -18,7 +18,7 @@ class VideoPlayer extends Component {
 
 VideoPlayer.propTypes = {
   actions: React.PropTypes.object,
-  activeVideo: React.PropTypes.string,
+  activeVideo: React.PropTypes.object,
 };
 
 const mapStateToProps = ({ activeVideo }) => ({ activeVideo });

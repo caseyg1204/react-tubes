@@ -1,9 +1,9 @@
 export const VIDEO_SELECTED = 'VIDEO_SELECTED';
 
-export const selectVideo = videoId =>
+export const selectVideo = video =>
   dispatch => (
           dispatch({
-            payload: videoId,
+            payload: video,
             type: VIDEO_SELECTED,
           })
       );

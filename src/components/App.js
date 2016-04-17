@@ -1,13 +1,13 @@
 import React from 'react';
 import SearchBox from './SearchBox';
 import SearchResults from './SearchResults';
-import VideoPlayer from './VideoPlayer';
+import NowPlaying from './NowPlaying';
 
 const App = () =>
   (<div>
       <SearchBox />
       <SearchResults />
-      <VideoPlayer />
+      <NowPlaying />
     </div>
   );
 
