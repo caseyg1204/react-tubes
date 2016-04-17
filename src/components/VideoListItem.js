@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { selectVideo } from '../actions/select_active_video';
 import { getStats } from '../actions/get_active_video_stats';
 
-class SearchResult extends Component {
+class VideoListItem extends Component {
   setAsActive = () => {
     this.props.actions.selectVideo(this.props.searchResult);
     this.props.actions.getStats(this.props.searchResult.id.videoId);
@@ -20,7 +20,7 @@ class SearchResult extends Component {
   }
 }
 
-SearchResult.propTypes = {
+VideoListItem.propTypes = {
   actions: React.PropTypes.object,
   searchResult: React.PropTypes.object,
 };
@@ -33,4 +33,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchResult);
+export default connect(mapStateToProps, mapDispatchToProps)(VideoListItem);

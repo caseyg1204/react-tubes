@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import cookie from 'react-cookie';
 
 import { addFavorite, removeFavorite } from '../actions/favorite_video';
 
 class Favorite extends Component {
+  componentWillReceiveProps(newProps) {
+    cookie.save('favorites', JSON.stringify(newProps.favorites), { path: '/' });
+  }
   addFavorite = () => {
-    this.props.actions.addFavorite(this.props.id);
+    this.props.actions.addFavorite(this.props.video);
   }
 
   removeFavorite = () => {
-    this.props.actions.removeFavorite(this.props.id);
+    this.props.actions.removeFavorite(this.props.video);
   }
   render() {
-    const { id } = this.props;
-    if (!id) { return null; }
-    const isFavorite = this.props.favorites[id];
+    const { video } = this.props;
+    console.log(video);
+    if (!video.id) { return null; }
+    const isFavorite = this.props.favorites[video.id.videoId];
     if (isFavorite) {
       return <h1 onClick={this.removeFavorite}> FAVORITE</h1>;
     }
@@ -26,7 +31,7 @@ class Favorite extends Component {
 Favorite.propTypes = {
   actions: React.PropTypes.object,
   favorites: React.PropTypes.object,
-  id: React.PropTypes.string,
+  video: React.PropTypes.object,
 };
 
 const mapStateToProps = ({ favorites }) => ({ favorites });

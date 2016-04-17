@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import SearchResult from './SearchResult';
+import VideoListItem from './VideoListItem';
 
 class SearchResults extends Component {
   renderItems() {
     return (
       <div>
       {this.props.searchResults.items.map((searchResult, index) => (
-        <SearchResult searchResult={searchResult} key={index} />
+        <VideoListItem searchResult={searchResult} key={index} />
       ))}
       </div>
     );

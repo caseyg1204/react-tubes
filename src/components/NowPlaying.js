@@ -22,13 +22,12 @@ class NowPlaying extends Component {
       </div>);
   }
   render() {
-    const video = this.props.activeVideo.snippet;
+    const video = this.props.activeVideo;
     if (!this.props.activeVideo.id || !this.props.activeVideo.id.videoId) { return null; }
-    const { videoId } = this.props.activeVideo.id;
     return (<div>
-        <h1>{video.title}</h1>
-        <h2>{video.description}</h2>
-        <Favorite id={videoId} />
+        <h1>{video.snippet.title}</h1>
+        <h2>{video.snippet.description}</h2>
+        <Favorite video={video} />
           <VideoPlayer />
           {this.renderStats()}
       </div>);
