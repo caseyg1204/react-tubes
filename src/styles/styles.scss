@@ -7,15 +7,14 @@ $vin-red: #ff0000;
 @import './react_select/components';
 @import './react_select/control';
 @import './geo';
+// @import './search';
 
 /* Styles */
 body {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.4em;
   color: #4d4d4d;
-  min-width: 230px;
-  max-width: 550px;
-  margin: 0 auto;
+  margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
   font-smoothing: antialiased;
@@ -30,7 +29,94 @@ h2 {
 	color: $vin-blue;
 }
 
-.savings { color: $vin-green; }
-.loss { color: $vin-red; }
-input.small { width: 46px; }
-td.fuel-savings-label { width: 175px; }
+.app {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+.group {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px;
+}
+
+.orderBy {
+  display: flex;
+  flex: 3;
+  padding-left: 5px;
+  justify-content: flex-end;
+
+  .select {
+    width: 100%;
+  }
+}
+
+.location {
+  display: flex;
+  flex: 4;
+  justify-content: space-around;
+}
+
+.search {
+  display: flex;
+  flex: 2;
+  flex-direction: column;
+  padding: 10px;
+  margin-right: 20px;
+
+  .searchInput {
+    	background-color: $select-input-bg;
+    	border-color: lighten($select-input-border-color, 5%) $select-input-border-color darken($select-input-border-color, 10%);
+    	border-radius: $select-input-border-radius;
+    	border: $select-input-border-width solid $select-input-border-color;
+    	color: $select-text-color;
+    	cursor: default;
+    	display: table;
+    	border-spacing: 0;
+    	border-collapse: separate;
+    	height: $select-input-height;
+    	outline: none;
+    	overflow: hidden;
+    	position: relative;
+      font-size: 2rem;
+    	width: 100%;
+
+    	&:hover {
+    		box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+    	}
+  }
+
+}
+
+button {
+  width: 100%;
+  height: 50px;
+  font-size: 2rem;
+  border: $vin-blue 1px solid;
+  background-color: white;
+}
+.nowPlaying {
+  display: flex;
+  flex: 5;
+}
+
+.favorites {
+  display: flex;
+  flex: 3;
+  margin-left: 5px;
+}
+
+.videoPlayer {
+  margin-top: 10px;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  span {
+    font-weight: bold;
+  }
+}

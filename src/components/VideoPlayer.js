@@ -11,7 +11,7 @@ class VideoPlayer extends Component {
       'frameborder="0" allowfullscreen></iframe>',
     };
     return (
-        <div dangerouslySetInnerHTML={ iframe } />
+        <div className="videoPlayer" dangerouslySetInnerHTML={ iframe } />
       );
   }
 }

@@ -7,9 +7,10 @@ class SearchResults extends Component {
   renderItems() {
     return (
       <div>
-      {this.props.searchResults.items.map((searchResult, index) => (
-        <VideoListItem searchResult={searchResult} key={index} />
-      ))}
+        <h2>Search Results</h2>
+        {this.props.searchResults.items.map((searchResult, index) => (
+          <VideoListItem searchResult={searchResult} key={index} />
+        ))}
       </div>
     );
   }

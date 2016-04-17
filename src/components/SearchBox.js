@@ -20,8 +20,6 @@ class SearchBox extends Component {
   }
   selectedSort = option => {
     this.setState({ sortOrder: option.id });
-    if (!this.props.fields.searchTerms.value) {return;}
-    this.search(this.props.fields.searchTerms.value, option.id);
   }
   sortOptions = [
     { id: 'relevance', display: 'Relevance' },
@@ -52,28 +50,42 @@ class SearchBox extends Component {
 
   render() {
     return (
-      <div>
         <form onSubmit={this.props.handleSubmit(this.submitSearch)}>
-          <input type="text" {...this.props.fields.searchTerms} />
-          <button onClick={this.submitSearch} type="button">Search</button>
-          <Select
-            name="sortSelect"
-            autosize
-            onChange={this.selectedSort}
-            options={this.sortOptions}
-            valueKey="id"
-            labelKey="display"
-            value={this.state.sortOrder}
+          <input className="searchInput"
+            type="text"
+            {...this.props.fields.searchTerms}
+            placeholder="enter search"
           />
-          <div className="geo">
-          <Geosuggest
-            placeholder="Enter place to filter by location"
-            onSuggestSelect={this.selectPlace}
-            onChange={this.placeChange}
-          />
+          <div className="group">
+            <div>OrderBy: </div>
+            <div className="orderBy">
+              <Select
+                className="select"
+                name="sortSelect"
+                autosize
+                onChange={this.selectedSort}
+                options={this.sortOptions}
+                valueKey="id"
+                labelKey="display"
+                value={this.state.sortOrder}
+              />
+            </div>
           </div>
-        </form>
-      </div>);
+          <div className=" group">
+            <div>Location: </div>
+            <div className="location">
+              <Geosuggest
+                className="geo"
+                placeholder="Enter place to filter by location"
+                onSuggestSelect={this.selectPlace}
+                onChange={this.placeChange}
+              />
+            </div>
+          </div>
+          <div>
+            <button onClick={this.submitSearch} type="button">Search</button>
+          </div>
+        </form>);
   }
 }
 

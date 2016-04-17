@@ -5,11 +5,17 @@ import NowPlaying from './NowPlaying';
 import Favorites from './Favorites';
 
 const App = () =>
-  (<div>
-      <SearchBox />
-      <SearchResults />
-      <NowPlaying />
-      <Favorites />
+  (<div className="app">
+      <div className="search">
+        <SearchBox />
+        <SearchResults />
+      </div>
+      <div className="nowPlaying">
+        <NowPlaying />
+      </div>
+      <div className="favorites">
+        <Favorites />
+      </div>
     </div>
   );
 

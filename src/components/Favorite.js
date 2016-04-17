@@ -18,13 +18,12 @@ class Favorite extends Component {
   }
   render() {
     const { video } = this.props;
-    console.log(video);
     if (!video.id) { return null; }
     const isFavorite = this.props.favorites[video.id.videoId];
     if (isFavorite) {
-      return <h1 onClick={this.removeFavorite}> FAVORITE</h1>;
+      return <button onClick={this.removeFavorite}>Unfavorite</button>;
     }
-    return <h1 onClick={this.addFavorite}>NOT A FAVORITE</h1>;
+    return <button onClick={this.addFavorite}>FAVORITE</button>;
   }
 }
 

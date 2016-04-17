@@ -8,10 +8,11 @@ class Favorites extends Component {
     const favorites = Object.keys(this.props.favorites);
     return (
       <div>
-      {favorites.map((favorite, index) => {
-        const item = this.props.favorites[favorite];
-        return <VideoListItem searchResult={item} key={index} />;
-      })}
+        <h2>Favorites</h2>
+        {favorites.map((favorite, index) => {
+          const item = this.props.favorites[favorite];
+          return <VideoListItem searchResult={item} key={index} />;
+        })}
       </div>
     );
   }

@@ -13,23 +13,24 @@ class NowPlaying extends Component {
     if (!stats.items || !stats.items.length || !stats.items[0].statistics) { return null; }
     const counts = stats.items[0].statistics;
     return (
-      <div>
-        <p>Comments {counts.commentCount}</p>
-        <p>Likes {counts.likeCount}</p>
-        <p>Views {counts.viewCount}</p>
-        <p>Favorites {counts.favoriteCount}</p>
-        <p>Dislikes {counts.dislikeCount}</p>
+      <div className="stats">
+        <div><span>Comments</span> {counts.commentCount}</div>
+        <div><span>Likes</span> {counts.likeCount}</div>
+        <div><span>Views</span> {counts.viewCount}</div>
+        <div><span>Favorites</span> {counts.favoriteCount}</div>
+        <div><span>Dislikes</span> {counts.dislikeCount}</div>
       </div>);
   }
   render() {
     const video = this.props.activeVideo;
     if (!this.props.activeVideo.id || !this.props.activeVideo.id.videoId) { return null; }
-    return (<div>
-        <h1>{video.snippet.title}</h1>
-        <h2>{video.snippet.description}</h2>
+    return (
+      <div>
+        <h2>{video.snippet.title}</h2>
+        <h3>{video.snippet.description}</h3>
         <Favorite video={video} />
-          <VideoPlayer />
-          {this.renderStats()}
+        <VideoPlayer />
+        {this.renderStats()}
       </div>);
   }
 }
