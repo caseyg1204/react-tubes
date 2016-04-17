@@ -3,6 +3,10 @@ $vin-blue: #5bb7db;
 $vin-green: #60b044;
 $vin-red: #ff0000;
 
+@import './react_select/select';
+@import './react_select/components';
+@import './react_select/control';
+
 /* Styles */
 body {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
